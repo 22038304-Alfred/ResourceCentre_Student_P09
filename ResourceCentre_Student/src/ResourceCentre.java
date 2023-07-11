@@ -227,7 +227,20 @@ public class ResourceCentre {
 	
 	public static boolean doLoanChromebook(ArrayList<Chromebook> chromebookList, String tag, String dueDate) {
 		// write your code here
-		return true;
+		
+		boolean loaned = false;
+		if(tag.isEmpty() || dueDate.isEmpty())
+			loaned = false;
+		for(Chromebook i : chromebookList) {
+			if(tag.equalsIgnoreCase(i.getAssetTag()) && i.getIsAvailable() == true)
+			{
+				i.setIsAvailable(false);
+				i.setDueDate(dueDate);
+				
+				loaned = true;
+			}
+		}
+		return loaned;
 	}
 	public static void loanChromebook(ArrayList<Chromebook> chromebookList) {
 		// write your code here		
